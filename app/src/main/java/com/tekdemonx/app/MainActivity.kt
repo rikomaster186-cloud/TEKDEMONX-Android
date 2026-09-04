@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         root = FrameLayout(this)
         root.setBackgroundColor(Color.rgb(5, 5, 5))
         setContentView(root)
-        checkSession()
+        showAuth()
     }
 
     private fun checkSession() {
