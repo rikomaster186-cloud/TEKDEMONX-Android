@@ -1,4 +1,4 @@
-name: Build TEKDEMONX APK
+name: Build PUBGUC Release APK
 
 on:
   push:
@@ -30,11 +30,21 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Build APK
-        run: gradle :app:assembleDebug --stacktrace
+      - name: Restore signing keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > pubguc-release.jks
 
-      - name: Upload APK
+      - name: Build signed release APK
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: gradle :app:assembleRelease --stacktrace
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/app-release.apk PUBGUC.apk
+
+      - name: Upload PUBGUC APK
         uses: actions/upload-artifact@v4
         with:
-          name: TEKDEMONX-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: PUBGUC
+          path: PUBGUC.apk
