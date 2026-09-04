@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         wrap.addView(TextView(this).apply {
-            text = "by TEKDEMONX"
+            this.text = "by TEKDEMONX"
             setTextColor(green)
             textSize = 14f
             gravity = Gravity.CENTER
@@ -597,7 +597,7 @@ class MainActivity : AppCompatActivity() {
             setHintTextColor(Color.rgb(130, 137, 132))
             setTextColor(Color.WHITE)
             textSize = 15f
-            singleLine = true
+            setSingleLine(true)
             background = rounded(field, Color.rgb(55, 62, 57), 1, 14)
             setPadding(dp(15), dp(13), dp(15), dp(13))
 
